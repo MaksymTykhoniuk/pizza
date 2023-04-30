@@ -1,16 +1,19 @@
+import React from 'react';
+import Header from './Header/Header';
+import PizzaList from './PizzaList/PizzaList';
+import Filter from './Filter/Filter';
+import '../scss/app.scss';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div className="wrapper">
+      <Header />
+      <div className="content">
+        <div className="container">
+          <Filter />
+          <PizzaList />
+        </div>
+      </div>
     </div>
   );
 };
