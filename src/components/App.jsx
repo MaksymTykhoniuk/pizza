@@ -1,19 +1,21 @@
-import React from 'react';
-import Header from './Header/Header';
-import PizzaList from './PizzaList/PizzaList';
-import Filter from './Filter/Filter';
+import React, { lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import { SharedLayout } from './SharedLayout/SharedLayout';
+
 import '../scss/app.scss';
+const Home = lazy(() => import('../pages/Home'));
+const Cart = lazy(() => import('../pages/Cart'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 export const App = () => {
   return (
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <div className="container">
-          <Filter />
-          <PizzaList />
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
