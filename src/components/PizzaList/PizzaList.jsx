@@ -18,6 +18,7 @@ const PizzaList = () => {
       .catch(e => {
         throw new Error(e);
       });
+    window.scroll(0, 0);
   }, []);
 
   return (

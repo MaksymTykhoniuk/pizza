@@ -2,13 +2,21 @@
 
 .sort {
   position: relative;
+
+  &__svg {
+    margin-right: 8px;
+    transition: rotate 150ms ease-in-out;
+
+    &--active {
+      margin-right: 8px;
+      transition: rotate 150ms ease-in-out;
+      rotate: 180deg;
+    }
+  }
+
   &__label {
     display: flex;
     align-items: center;
-
-    svg {
-      margin-right: 8px;
-    }
 
     b {
       margin-right: 8px;
@@ -35,6 +43,10 @@
     overflow: hidden;
     padding: 10px 0;
     width: 160px;
+
+    @media (max-width: 568px) {
+      left: -16px;
+    }
 
     ul {
       overflow: hidden;

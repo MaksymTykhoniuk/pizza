@@ -6,6 +6,7 @@
 
   @media (max-width: 568px) {
     padding-bottom: 0;
+    border-bottom: none;
   }
 
   .container {
@@ -20,6 +21,10 @@
 
   &__logo {
     display: flex;
+
+    @media (min-width: 375px) and (max-width: 567px) {
+      width: 240px;
+    }
 
     img {
       margin-right: 15px;

@@ -21,6 +21,10 @@ body {
 
   &__title {
     margin: 35px 0;
+
+    @media (min-width: 375px) and (max-width: 567px) {
+      margin-left: 10px;
+    }
   }
 
   &__items {
@@ -58,6 +62,10 @@ body {
 .container {
   width: $container-width;
   margin: 0 auto;
+
+  @media (min-width: 375px) and (max-width: 567px) {
+    width: 100%;
+  }
 
   &--cart {
     max-width: 820px;
