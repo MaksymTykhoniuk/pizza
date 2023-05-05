@@ -7,10 +7,24 @@ import Sort from '../Sort';
 const PizzaList = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeCategory, setAactiveCategory] = useState(0);
+  const [selectedSortVariant, setSelectedSortVariant] = useState({
+    name: 'популярности',
+    value: 'rating',
+  });
 
   useEffect(() => {
+    const category = activeCategory > 0 ? `category=${activeCategory}` : '';
+    const order = selectedSortVariant.value.includes('-') ? 'desc' : 'asc';
+    const sort = `sortBy=${selectedSortVariant.value.replace(
+      '-',
+      ''
+    )}&order=${order}`;
+
     setIsLoading(true);
-    fetch('https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items')
+    fetch(
+      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?${category}&${sort}`
+    )
       .then(res => {
         return res.json();
       })
@@ -22,13 +36,19 @@ const PizzaList = () => {
         throw new Error(e);
       });
     window.scroll(0, 0);
-  }, []);
+  }, [activeCategory, selectedSortVariant]);
 
   return (
     <>
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories
+          value={activeCategory}
+          onChangeCategory={id => setAactiveCategory(id)}
+        />
+        <Sort
+          value={selectedSortVariant}
+          onChangeSort={value => setSelectedSortVariant(value)}
+        />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <ul className="content__items">

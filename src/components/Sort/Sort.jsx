@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 
-const sortVariant = ['популярности', 'цене', 'алфавиту'];
+const sortVariant = [
+  { name: 'популярности', value: 'rating' },
+  { name: 'цене ⬇', value: '-price' },
+  { name: 'цене ⬆', value: 'price' },
+  { name: 'алфавиту', value: 'title' },
+];
 
-const Sort = () => {
+const Sort = ({ value, onChangeSort }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedVariant, setSelectedVariant] = useState(0);
-  const selectedOption = sortVariant[selectedVariant];
 
   const toggleVisible = () => setIsVisible(prev => !prev);
   const handleActiveVariant = idx => {
-    setSelectedVariant(idx);
+    onChangeSort(idx);
     setIsVisible(prev => !prev);
   };
 
@@ -30,7 +33,7 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisible}>{selectedOption}</span>
+        <span onClick={toggleVisible}>{value.name}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
@@ -38,10 +41,10 @@ const Sort = () => {
             {sortVariant.map((el, idx) => (
               <li
                 key={idx}
-                onClick={() => handleActiveVariant(idx)}
-                className={selectedVariant === idx ? 'active' : ''}
+                onClick={() => handleActiveVariant(el)}
+                className={value.name === el.name ? 'active' : ''}
               >
-                {el}
+                {el.name}
               </li>
             ))}
           </ul>

@@ -13,11 +13,12 @@ const PizzaItem = ({ item }) => {
     <div className="pizza-block-wrapper">
       <li className="pizza-block">
         <img
-          loading="lazy"
           className="pizza-block__image"
+          loading="lazy"
           src={imageUrl}
           alt="Pizza"
         />
+
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
