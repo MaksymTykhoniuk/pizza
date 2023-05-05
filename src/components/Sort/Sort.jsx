@@ -17,7 +17,6 @@ const Sort = () => {
     <div className="sort">
       <div className="sort__label">
         <svg
-          // className="sort__svg"
           className={isVisible ? 'sort__svg--active' : 'sort__svg'}
           width="10"
           height="6"

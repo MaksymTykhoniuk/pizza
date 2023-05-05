@@ -1,12 +1,9 @@
 import React from 'react';
-
-import Filter from 'components/Filter/Filter';
-import PizzaList from 'components/PizzaList/PizzaList';
+import PizzaList from 'components/PizzaList';
 
 const Home = () => {
   return (
     <>
-      <Filter />
       <PizzaList />
     </>
   );

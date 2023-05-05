@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const typeNames = ['тонкое', 'традиционное'];
-
 const PizzaItem = ({ item }) => {
   const { imageUrl, title, types, sizes, price } = item;
   const [activeType, setActiveType] = useState(0);
