@@ -5,6 +5,44 @@
   text-align: center;
   margin-bottom: 65px;
 
+  // &:hover &__overlay,
+  // &:focus &__overlay {
+  //   transform: translateY(0);
+  // }
+
+  &__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    height: 260px;
+  }
+
+  &__overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 101%;
+    height: 100%;
+    padding: 33px 22px;
+    background-color: #f3f3f3;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+
+    transform: translateY(101%);
+    transition: transform 250ms linear;
+
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+  }
+
+  &__overlay-desc {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.56;
+    color: black;
+  }
+
   &-wrapper {
     display: flex;
     justify-content: center;

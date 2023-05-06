@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const typeNames = ['тонкое', 'традиционное'];
 const PizzaItem = ({ item }) => {
-  const { imageUrl, title, types, sizes, price } = item;
+  const { imageUrl, title, types, sizes, price, ingredients } = item;
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
@@ -12,12 +14,19 @@ const PizzaItem = ({ item }) => {
   return (
     <div className="pizza-block-wrapper">
       <li className="pizza-block">
-        <img
-          className="pizza-block__image"
-          loading="lazy"
-          src={imageUrl}
-          alt="Pizza"
-        />
+        <div className="pizza-block__image-wrapper">
+          <LazyLoadImage
+            className="pizza-block__image"
+            src={imageUrl}
+            width={260}
+            height={260}
+            effect="blur"
+            alt="Pizza"
+          />
+          <div className="pizza-block__overlay">
+            <p className="pizza-block__overlay-desc">Состав: {ingredients}</p>
+          </div>
+        </div>
 
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
