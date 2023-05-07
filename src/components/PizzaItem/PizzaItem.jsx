@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const typeNames = ['традиционное', 'тонкое'];
+const typeNames = ['традициіне', 'тонке'];
 
 const PizzaItem = ({ item }) => {
   const { imageUrl, title, types, sizes, price, ingredients } = item;
@@ -35,7 +35,7 @@ const PizzaItem = ({ item }) => {
             alt="Pizza"
           />
           <div className="pizza-block__overlay">
-            <p className="pizza-block__overlay-desc">Состав: {ingredients}</p>
+            <p className="pizza-block__overlay-desc">Склад: {ingredients}</p>
           </div>
         </div>
 
@@ -79,7 +79,7 @@ const PizzaItem = ({ item }) => {
                 fill="white"
               />
             </svg>
-            <span>Добавить</span>
+            <span>Додати</span>
             <i>0</i>
           </button>
         </div>

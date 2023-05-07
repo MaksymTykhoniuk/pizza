@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 const sortVariant = [
-  { name: 'популярности', value: 'rating' },
-  { name: 'цене ⬇', value: '-price' },
-  { name: 'цене ⬆', value: 'price' },
-  { name: 'алфавиту', value: 'title' },
+  { name: 'популярності', value: 'rating' },
+  { name: 'ціні ⬇', value: '-price' },
+  { name: 'ціні ⬆', value: 'price' },
+  { name: 'алфавіту', value: 'title' },
 ];
 
 const Sort = ({ value, onChangeSort }) => {
@@ -32,7 +32,7 @@ const Sort = ({ value, onChangeSort }) => {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортувати по:</b>
         <span onClick={toggleVisible}>{value.name}</span>
       </div>
       {isVisible && (

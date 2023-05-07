@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import React, { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from './SharedLayout';
 
@@ -8,7 +8,7 @@ const Cart = lazy(() => import('../pages/Cart'));
 const NotFound = lazy(() => import('../pages/NotFound'));
 
 export const App = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <Routes>

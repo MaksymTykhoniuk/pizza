@@ -1,5 +1,5 @@
 import React from 'react';
-const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые'];
+const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', 'Гострі'];
 
 const Categories = ({ value, onChangeCategory }) => {
   return (

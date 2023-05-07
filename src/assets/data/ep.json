@@ -24,7 +24,7 @@
   {
     "id": 2,
     "imageUrl": "https://prontopizza.ua/vinnytsia/wp-content/uploads/sites/21/2023/03/chiken-300x300.webp",
-    "title": "Кисло-солодка курочку",
+    "title": "Кисло-солодка курочка",
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 175,
@@ -35,7 +35,7 @@
   {
     "id": 3,
     "imageUrl": "https://prontopizza.ua/vinnytsia/wp-content/uploads/sites/21/2021/07/chizburger-300x300.webp",
-    "title": "Чизбургер-пицца",
+    "title": "Чізбургер-піца",
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 215,
@@ -68,7 +68,7 @@
   {
     "id": 6,
     "imageUrl": "https://prontopizza.ua/vinnytsia/wp-content/uploads/sites/21/2021/07/4-sezony-300x300.webp",
-    "title": "Четири сезона",
+    "title": "Чотири сезони",
     "types": [0, 1],
     "sizes": [26, 30, 40],
     "price": 195,

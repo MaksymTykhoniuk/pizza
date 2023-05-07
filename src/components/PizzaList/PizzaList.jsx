@@ -9,7 +9,7 @@ const PizzaList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setAactiveCategory] = useState(0);
   const [selectedSortVariant, setSelectedSortVariant] = useState({
-    name: 'популярности',
+    name: 'популярності',
     value: 'rating',
   });
 
@@ -50,7 +50,7 @@ const PizzaList = () => {
           onChangeSort={value => setSelectedSortVariant(value)}
         />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">Усі піци</h2>
       <ul className="content__items">
         {isLoading
           ? [...new Array(6)].map((_, idx) => <Skeleton key={idx} />)

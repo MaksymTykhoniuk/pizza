@@ -7,7 +7,7 @@ const SearchForm = () => {
   return (
     <input
       className={styles.searchForm}
-      placeholder="Введите название пиццы..."
+      placeholder="Введіть назву піци..."
       name="search"
       type="text"
       value={searchQuery}
