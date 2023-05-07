@@ -5,10 +5,10 @@
   text-align: center;
   margin-bottom: 65px;
 
-  // &:hover &__overlay,
-  // &:focus &__overlay {
-  //   transform: translateY(0);
-  // }
+  &:hover &__overlay,
+  &:focus &__overlay {
+    transform: translateY(0);
+  }
 
   &__image-wrapper {
     position: relative;
@@ -50,7 +50,7 @@
 
   &__image {
     display: block;
-    margin-left: 14px;
+
     width: 260px;
   }
 

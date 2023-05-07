@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderLogo from '../../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 import '../../scss/app.scss';
+import SearchForm from 'components/SearchForm';
 
 const Header = () => {
   return (
@@ -16,6 +17,9 @@ const Header = () => {
             </div>
           </div>
         </Link>
+
+        <SearchForm />
+
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">
             <span>520 ₴</span>

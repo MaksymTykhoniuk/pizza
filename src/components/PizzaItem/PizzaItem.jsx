@@ -2,14 +2,25 @@ import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-const typeNames = ['тонкое', 'традиционное'];
+const typeNames = ['традиционное', 'тонкое'];
+
 const PizzaItem = ({ item }) => {
   const { imageUrl, title, types, sizes, price, ingredients } = item;
   const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSize] = useState(0);
+  const [activeSize, setActiveSize] = useState(26);
 
   const handleActiveType = el => setActiveType(el);
   const handleActiveSize = idx => setActiveSize(idx);
+
+  const handleFullPrice = () => {
+    if (activeSize === 30) {
+      return `${Math.round(price * 1.2)} ₴`;
+    } else if (activeSize === 40) {
+      return `${Math.round(price * 1.35)} ₴`;
+    } else {
+      return `от ${price} ₴`;
+    }
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -42,11 +53,11 @@ const PizzaItem = ({ item }) => {
             ))}
           </ul>
           <ul>
-            {sizes.map((el, idx) => (
+            {sizes.map(el => (
               <li
                 key={el}
-                onClick={() => handleActiveSize(idx)}
-                className={activeSize === idx ? 'active' : ''}
+                onClick={() => handleActiveSize(el)}
+                className={activeSize === el ? 'active' : ''}
               >
                 {el} см
               </li>
@@ -54,7 +65,7 @@ const PizzaItem = ({ item }) => {
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} ₴</div>
+          <div className="pizza-block__price">{handleFullPrice()}</div>
           <button className="button button--outline button--add">
             <svg
               width="12"
