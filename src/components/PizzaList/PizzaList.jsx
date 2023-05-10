@@ -3,8 +3,10 @@ import PizzaItem from '../PizzaItem';
 import Skeleton from '../Sceleton';
 import Categories from '../Categories';
 import Sort from '../Sort';
+import Pagination from 'components/Pagination';
 
 const PizzaList = () => {
+  const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setAactiveCategory] = useState(0);
@@ -23,7 +25,7 @@ const PizzaList = () => {
 
     setIsLoading(true);
     fetch(
-      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?${category}&${sort}`
+      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?page=${page}&limit=4&${category}&${sort}`
     )
       .then(res => {
         return res.json();
@@ -36,7 +38,7 @@ const PizzaList = () => {
         throw new Error(e);
       });
     window.scroll(0, 0);
-  }, [activeCategory, selectedSortVariant]);
+  }, [activeCategory, selectedSortVariant, page]);
 
   return (
     <>
@@ -56,6 +58,8 @@ const PizzaList = () => {
           ? [...new Array(6)].map((_, idx) => <Skeleton key={idx} />)
           : data.map(item => <PizzaItem key={item.id} item={item} />)}
       </ul>
+
+      <Pagination onChangePage={number => setPage(number)} />
     </>
   );
 };

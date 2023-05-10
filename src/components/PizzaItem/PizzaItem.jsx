@@ -11,7 +11,6 @@ const PizzaItem = ({ item }) => {
 
   const handleActiveType = el => setActiveType(el);
   const handleActiveSize = idx => setActiveSize(idx);
-
   const handleFullPrice = () => {
     if (activeSize === 30) {
       return `${Math.round(price * 1.2)} ₴`;

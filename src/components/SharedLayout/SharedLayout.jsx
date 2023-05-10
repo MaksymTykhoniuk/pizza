@@ -6,7 +6,7 @@ import Header from 'components/Header';
 const SharedLayout = () => {
   return (
     <div className="wrapper">
-      <Header />
+      <Header  />
       <div className="content">
         <div className="container">
           <Suspense fallback={<h1>Loading....😤</h1>}>

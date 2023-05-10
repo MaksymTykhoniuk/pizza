@@ -1,0 +1,45 @@
+.pagination {
+  display: flex;
+
+  li {
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    border: 1px solid #666;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+
+    transition: all 250ms linear;
+
+    &:hover {
+      border: 1px solid #fe5f1e;
+      scale: 1.3;
+      background-color: #fe5f1e;
+
+      a {
+        color: aliceblue;
+      }
+    }
+
+    a {
+      color: #666;
+      font-size: 26px;
+      padding: 8px;
+    }
+  }
+
+  :global {
+    .selected {
+      border: 1px solid #fe5f1e;
+      scale: 1.3;
+      background-color: #fe5f1e;
+
+      a {
+        color: aliceblue;
+      }
+    }
+  }
+}
