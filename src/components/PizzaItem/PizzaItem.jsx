@@ -17,7 +17,7 @@ const PizzaItem = ({ item }) => {
     } else if (activeSize === 40) {
       return `${Math.round(price * 1.35)} ₴`;
     } else {
-      return `от ${price} ₴`;
+      return `${price} ₴`;
     }
   };
 

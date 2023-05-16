@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styles from './SearchForm.module.scss';
+import { SearchValue } from 'components/App';
 
 const SearchForm = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { searchQuery, setSearchQuery } = useContext(SearchValue);
 
   return (
-    <input
-      className={styles.searchForm}
-      placeholder="Введіть назву піци..."
-      name="search"
-      type="text"
-      value={searchQuery}
-      onChange={evt => setSearchQuery(evt.target.value)}
-    />
+    <div>
+      <input
+        className={styles.searchForm}
+        placeholder="Введіть назву піци..."
+        name="search"
+        type="text"
+        value={searchQuery}
+        onChange={evt => setSearchQuery(evt.target.value)}
+      />
+      <button
+        onClick={() => setSearchQuery('')}
+        type="button"
+        className={styles.searchFormClear}
+      >
+        X
+      </button>
+    </div>
   );
 };
 

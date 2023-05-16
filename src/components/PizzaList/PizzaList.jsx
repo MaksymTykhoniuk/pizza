@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PizzaItem from '../PizzaItem';
 import Skeleton from '../Sceleton';
 import Categories from '../Categories';
 import Sort from '../Sort';
 import Pagination from 'components/Pagination';
+import { SearchValue } from 'components/App';
 
 const PizzaList = () => {
+  const { searchQuery } = useContext(SearchValue);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,10 +24,11 @@ const PizzaList = () => {
       '-',
       ''
     )}&order=${order}`;
+    const search = searchQuery ? `search=${searchQuery}` : '';
 
     setIsLoading(true);
     fetch(
-      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?page=${page}&limit=4&${category}&${sort}`
+      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?page=${page}&limit=4&${category}&${sort}&${search}`
     )
       .then(res => {
         return res.json();
@@ -38,7 +41,7 @@ const PizzaList = () => {
         throw new Error(e);
       });
     window.scroll(0, 0);
-  }, [activeCategory, selectedSortVariant, page]);
+  }, [activeCategory, selectedSortVariant, page, searchQuery]);
 
   return (
     <>
