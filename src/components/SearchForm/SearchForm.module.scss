@@ -1,8 +1,23 @@
-.searchForm {
+.searchFormWrapper {
   position: relative;
-  border: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.searchForm {
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 12px 12px;
   width: 250px;
   font-size: 16px;
+
+  &:focus {
+    border-color: #2b2525;
+  }
+}
+
+.searchFormClear {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  font-size: 24px;
+  color: #fe5f1e;
 }

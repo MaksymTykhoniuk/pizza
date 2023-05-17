@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import styles from './SearchForm.module.scss';
 import { SearchValue } from 'components/App';
+import { FiDelete } from 'react-icons/fi';
 
 const SearchForm = () => {
   const { searchQuery, setSearchQuery } = useContext(SearchValue);
 
   return (
-    <div>
+    <div className={styles.searchFormWrapper}>
       <input
         className={styles.searchForm}
         placeholder="Введіть назву піци..."
@@ -15,13 +16,14 @@ const SearchForm = () => {
         value={searchQuery}
         onChange={evt => setSearchQuery(evt.target.value)}
       />
-      <button
-        onClick={() => setSearchQuery('')}
-        type="button"
-        className={styles.searchFormClear}
-      >
-        X
-      </button>
+
+      {searchQuery && (
+        <FiDelete
+          onClick={() => setSearchQuery('')}
+          type="button"
+          className={styles.searchFormClear}
+        />
+      )}
     </div>
   );
 };

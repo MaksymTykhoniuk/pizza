@@ -3,12 +3,13 @@ import PizzaItem from '../PizzaItem';
 import Skeleton from '../Sceleton';
 import Categories from '../Categories';
 import Sort from '../Sort';
-import Pagination from 'components/Pagination';
 import { SearchValue } from 'components/App';
+
+const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', 'Гострі'];
 
 const PizzaList = () => {
   const { searchQuery } = useContext(SearchValue);
-  const [page, setPage] = useState(1);
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setAactiveCategory] = useState(0);
@@ -24,11 +25,9 @@ const PizzaList = () => {
       '-',
       ''
     )}&order=${order}`;
-    const search = searchQuery ? `search=${searchQuery}` : '';
-
     setIsLoading(true);
     fetch(
-      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?page=${page}&limit=4&${category}&${sort}&${search}`
+      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?${category}&${sort}`
     )
       .then(res => {
         return res.json();
@@ -41,8 +40,16 @@ const PizzaList = () => {
         throw new Error(e);
       });
     window.scroll(0, 0);
-  }, [activeCategory, selectedSortVariant, page, searchQuery]);
+  }, [activeCategory, selectedSortVariant]);
 
+  const normalizeValue = searchQuery.toLowerCase();
+
+  const skeleton = [...new Array(6)].map((_, idx) => <Skeleton key={idx} />);
+  const pizzas = data
+    .filter(item => item.title.toLowerCase().includes(normalizeValue))
+    .map(item => <PizzaItem key={item.id} item={item} />);
+
+  const pizzaLength = pizzas.length;
   return (
     <>
       <div className="content__top">
@@ -55,16 +62,38 @@ const PizzaList = () => {
           onChangeSort={value => setSelectedSortVariant(value)}
         />
       </div>
-      <h2 className="content__title">Усі піци</h2>
-      <ul className="content__items">
-        {isLoading
-          ? [...new Array(6)].map((_, idx) => <Skeleton key={idx} />)
-          : data.map(item => <PizzaItem key={item.id} item={item} />)}
-      </ul>
+      <h2 className="content__title">{categories[activeCategory]} піци</h2>
+      <ul className="content__items">{isLoading ? skeleton : pizzas}</ul>
 
-      <Pagination onChangePage={number => setPage(number)} />
+      {pizzaLength === 0 && (
+        <h1>Sorry, but there are no results for your query</h1>
+      )}
     </>
   );
 };
 
 export default PizzaList;
+
+// useEffect(() => {
+//   const category = activeCategory > 0 ? `category=${activeCategory}` : '';
+//   const order = selectedSortVariant.value.includes('-') ? 'desc' : 'asc';
+//   const sort = `sortBy=${selectedSortVariant.value.replace(
+//     '-',
+//     ''
+//   )}&order=${order}`;
+//   setIsLoading(true);
+//   fetch(
+//     `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?page=${page}&limit=4&${category}&${sort}`
+//   )
+//     .then(res => {
+//       return res.json();
+//     })
+//     .then(res => {
+//       setData(res);
+//       setIsLoading(false);
+//     })
+//     .catch(e => {
+//       throw new Error(e);
+//     });
+//   window.scroll(0, 0);
+// }, [activeCategory, selectedSortVariant, page]);
