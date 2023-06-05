@@ -5,12 +5,13 @@ import Categories from '../Categories';
 import Sort from '../Sort';
 import { SearchValue } from 'components/App';
 import { useSelector } from 'react-redux';
+import { selectCategoryId, selectSortType } from 'redux/selectors';
 
 const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', 'Гострі'];
 
 const PizzaList = () => {
-  const categoryId = useSelector(state => state.filter.categoryId);
-  const selctedSortVariant = useSelector(state => state.filter.sort);
+  const categoryId = useSelector(selectCategoryId);
+  const selectedSortVariant = useSelector(selectSortType);
 
   const { searchQuery } = useContext(SearchValue);
   const [data, setData] = useState([]);
@@ -18,8 +19,8 @@ const PizzaList = () => {
 
   useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const order = selctedSortVariant.value.includes('-') ? 'desc' : 'asc';
-    const sort = `sortBy=${selctedSortVariant.value.replace(
+    const order = selectedSortVariant.value.includes('-') ? 'desc' : 'asc';
+    const sort = `sortBy=${selectedSortVariant.value.replace(
       '-',
       ''
     )}&order=${order}`;
@@ -38,7 +39,7 @@ const PizzaList = () => {
         throw new Error(e);
       });
     window.scroll(0, 0);
-  }, [categoryId, selctedSortVariant]);
+  }, [categoryId, selectedSortVariant]);
 
   const normalizeValue = searchQuery.toLowerCase();
   const skeleton = [...new Array(6)].map((_, idx) => <Skeleton key={idx} />);
