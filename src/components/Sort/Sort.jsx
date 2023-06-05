@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortVariant } from 'redux/slices/filterSlice';
 
 const sortVariant = [
   { name: 'популярності', value: 'rating' },
@@ -7,12 +9,16 @@ const sortVariant = [
   { name: 'алфавіту', value: 'title' },
 ];
 
-const Sort = ({ value, onChangeSort }) => {
+const Sort = () => {
+  const dispatch = useDispatch();
+  const selctedSortVariant = useSelector(state => state.filter.sort);
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleSortVariant = value => dispatch(setSortVariant(value));
   const toggleVisible = () => setIsVisible(prev => !prev);
+
   const handleActiveVariant = idx => {
-    onChangeSort(idx);
+    handleSortVariant(idx);
     setIsVisible(prev => !prev);
   };
 
@@ -33,7 +39,7 @@ const Sort = ({ value, onChangeSort }) => {
           />
         </svg>
         <b>Сортувати по:</b>
-        <span onClick={toggleVisible}>{value.name}</span>
+        <span onClick={toggleVisible}>{selctedSortVariant.name}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
@@ -42,7 +48,7 @@ const Sort = ({ value, onChangeSort }) => {
               <li
                 key={idx}
                 onClick={() => handleActiveVariant(el)}
-                className={value.name === el.name ? 'active' : ''}
+                className={selctedSortVariant.name === el.name ? 'active' : ''}
               >
                 {el.name}
               </li>

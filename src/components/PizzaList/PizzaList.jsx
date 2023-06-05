@@ -4,22 +4,17 @@ import Skeleton from '../Sceleton';
 import Categories from '../Categories';
 import Sort from '../Sort';
 import { SearchValue } from 'components/App';
-import { useSelector, useDispatch } from 'react-redux';
-import { setGategoryId, setSortVariant } from 'redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
 
 const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', 'Гострі'];
 
 const PizzaList = () => {
-  const dispatch = useDispatch();
   const categoryId = useSelector(state => state.filter.categoryId);
   const selctedSortVariant = useSelector(state => state.filter.sort);
 
   const { searchQuery } = useContext(SearchValue);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleCategory = id => dispatch(setGategoryId(id));
-  const handleSortVariant = value => dispatch(setSortVariant(value));
 
   useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -56,14 +51,8 @@ const PizzaList = () => {
   return (
     <>
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onChangeCategory={id => handleCategory(id)}
-        />
-        <Sort
-          value={selctedSortVariant}
-          onChangeSort={value => handleSortVariant(value)}
-        />
+        <Categories />
+        <Sort />
       </div>
       <h2 className="content__title">
         {categoryId === 2 ? vegPizzas : `${categories[categoryId]} піци`}
