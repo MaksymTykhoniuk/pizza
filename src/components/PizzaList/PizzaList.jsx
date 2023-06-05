@@ -51,6 +51,7 @@ const PizzaList = () => {
     .filter(item => item.title.toLowerCase().includes(normalizeValue))
     .map(item => <PizzaItem key={item.id} item={item} />);
   const pizzaLength = pizzas.length;
+  const vegPizzas = `Піци ${categories[categoryId].toLocaleLowerCase()}`;
 
   return (
     <>
@@ -64,7 +65,9 @@ const PizzaList = () => {
           onChangeSort={value => handleSortVariant(value)}
         />
       </div>
-      <h2 className="content__title">{categories[categoryId]} піци</h2>
+      <h2 className="content__title">
+        {categoryId === 2 ? vegPizzas : `${categories[categoryId]} піци`}
+      </h2>
       <ul className="content__items">{isLoading ? skeleton : pizzas}</ul>
 
       {pizzaLength === 0 && (

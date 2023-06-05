@@ -12,11 +12,11 @@ const filterSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setGategoryId(state, action) {
-      state.categoryId = action.payload;
+    setGategoryId(state, { payload }) {
+      state.categoryId = payload;
     },
-    setSortVariant(state, action) {
-      state.sort = action.payload;
+    setSortVariant(state, { payload }) {
+      state.sort = payload;
     },
   },
 });
