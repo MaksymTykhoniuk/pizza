@@ -8,6 +8,9 @@ const PizzaItem = ({ item }) => {
   const { imageUrl, title, types, sizes, price, ingredients } = item;
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(26);
+  const [infoVisible, setInfoVisible] = useState(false);
+
+  const handleInfoVisible = () => setInfoVisible(prev => !prev);
 
   const handleActiveType = el => setActiveType(el);
   const handleActiveSize = idx => setActiveSize(idx);
@@ -33,9 +36,20 @@ const PizzaItem = ({ item }) => {
             effect="blur"
             alt="Pizza"
           />
-          <div className="pizza-block__overlay">
-            <p className="pizza-block__overlay-desc">Склад: {ingredients}</p>
-          </div>
+
+          <button
+            onClick={handleInfoVisible}
+            className="pizza-block__info"
+            type="button"
+          >
+            i
+          </button>
+
+          {infoVisible && (
+            <div className="pizza-block__overlay">
+              <p className="pizza-block__overlay-desc">Склад: {ingredients}</p>
+            </div>
+          )}
         </div>
 
         <h4 className="pizza-block__title">{title}</h4>

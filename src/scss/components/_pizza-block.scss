@@ -5,10 +5,23 @@
   text-align: center;
   margin-bottom: 65px;
 
-  &:hover &__overlay,
-  &:focus &__overlay {
-    transform: translateY(0);
+  &__info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fe5f1e;
+    width: 30px;
+    height: 30px;
+    font-weight: 900;
+    z-index: 15;
+    border: 1px solid #fe5f1e;
+    border-radius: 50%;
   }
+
+  // &:hover &__overlay,
+  // &:focus &__overlay {
+  //   transform: translateY(0);
+  // }
 
   &__image-wrapper {
     position: relative;
@@ -28,8 +41,8 @@
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
 
-    transform: translateY(101%);
-    transition: transform 250ms linear;
+    // transform: translateY(101%);
+    // transition: transform 250ms linear;
 
     @media (max-width: 767px) {
       height: 100%;
