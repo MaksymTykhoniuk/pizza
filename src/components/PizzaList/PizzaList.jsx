@@ -1,45 +1,47 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  selectCategoryId,
+  selectSortType,
+  searchQueryValue,
+} from 'redux/selectors';
+import axios from 'axios';
 import PizzaItem from '../PizzaItem';
 import Skeleton from '../Sceleton';
 import Categories from '../Categories';
 import Sort from '../Sort';
-import { SearchValue } from 'components/App';
-import { useSelector } from 'react-redux';
-import { selectCategoryId, selectSortType } from 'redux/selectors';
 
 const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', 'Гострі'];
 
 const PizzaList = () => {
   const categoryId = useSelector(selectCategoryId);
-  const selectedSortVariant = useSelector(selectSortType);
+  const sortVariant = useSelector(selectSortType);
 
-  const { searchQuery } = useContext(SearchValue);
+  const searchQuery = useSelector(searchQueryValue);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const order = selectedSortVariant.value.includes('-') ? 'desc' : 'asc';
-    const sort = `sortBy=${selectedSortVariant.value.replace(
-      '-',
-      ''
-    )}&order=${order}`;
+    const order = sortVariant.value.includes('-') ? 'desc' : 'asc';
+    const sort = `sortBy=${sortVariant.value.replace('-', '')}&order=${order}`;
+
     setIsLoading(true);
-    fetch(
-      `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?${category}&${sort}`
-    )
+
+    axios
+      .get(
+        `https://644fc5e0ba9f39c6ab6c0206.mockapi.io/items?${category}&${sort}`
+      )
       .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        setData(res);
+        setData(res.data);
         setIsLoading(false);
       })
       .catch(e => {
         throw new Error(e);
       });
+
     window.scroll(0, 0);
-  }, [categoryId, selectedSortVariant]);
+  }, [categoryId, sortVariant]);
 
   const normalizeValue = searchQuery.toLowerCase();
   const skeleton = [...new Array(6)].map((_, idx) => <Skeleton key={idx} />);

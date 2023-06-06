@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSortVariant } from 'redux/slices/filterSlice';
 import { selectSortType } from 'redux/selectors';
 
-const sortVariant = [
+const sortVariantList = [
   { name: 'популярності', value: 'rating' },
   { name: 'ціні ⬇', value: '-price' },
   { name: 'ціні ⬆', value: 'price' },
@@ -12,14 +12,14 @@ const sortVariant = [
 
 const Sort = () => {
   const dispatch = useDispatch();
-  const selectedSortVariant = useSelector(selectSortType);
+  const sortVariant = useSelector(selectSortType);
   const [isVisible, setIsVisible] = useState(false);
 
   const handleSortVariant = value => dispatch(setSortVariant(value));
   const toggleVisible = () => setIsVisible(prev => !prev);
 
-  const handleActiveVariant = idx => {
-    handleSortVariant(idx);
+  const handleActiveVariant = obj => {
+    handleSortVariant(obj);
     setIsVisible(prev => !prev);
   };
 
@@ -40,16 +40,16 @@ const Sort = () => {
           />
         </svg>
         <b>Сортувати по:</b>
-        <span onClick={toggleVisible}>{selectedSortVariant.name}</span>
+        <span onClick={toggleVisible}>{sortVariant.name}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
           <ul>
-            {sortVariant.map((el, idx) => (
+            {sortVariantList.map((el, idx) => (
               <li
                 key={idx}
                 onClick={() => handleActiveVariant(el)}
-                className={selectedSortVariant.name === el.name ? 'active' : ''}
+                className={sortVariant.name === el.name ? 'active' : ''}
               >
                 {el.name}
               </li>

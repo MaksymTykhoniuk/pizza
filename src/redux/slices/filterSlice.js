@@ -6,6 +6,7 @@ const initialState = {
     name: 'популярності',
     value: 'rating',
   },
+  search: '',
 };
 
 const filterSlice = createSlice({
@@ -18,9 +19,13 @@ const filterSlice = createSlice({
     setSortVariant(state, { payload }) {
       state.sort = payload;
     },
+    setSearchQuery(state, { payload }) {
+      state.search = payload;
+    },
   },
 });
 
-export const { setGategoryId, setSortVariant } = filterSlice.actions;
+export const { setGategoryId, setSortVariant, setSearchQuery } =
+  filterSlice.actions;
 
 export default filterSlice.reducer;
