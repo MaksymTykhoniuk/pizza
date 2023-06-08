@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   selectCategoryId,
   selectSortType,
-  searchQueryValue,
+  selectSearchQuery,
 } from 'redux/selectors';
 import axios from 'axios';
 import PizzaItem from '../PizzaItem';
@@ -16,8 +16,8 @@ const categories = ['Усі', "М'ясні", "Без м'яса", 'Гриль', '
 const PizzaList = () => {
   const categoryId = useSelector(selectCategoryId);
   const sortVariant = useSelector(selectSortType);
+  const searchQuery = useSelector(selectSearchQuery);
 
-  const searchQuery = useSelector(searchQueryValue);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

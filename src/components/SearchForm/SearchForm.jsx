@@ -4,11 +4,11 @@ import styles from './SearchForm.module.scss';
 import { FiDelete } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchQuery } from 'redux/slices/filterSlice';
-import { searchQueryValue } from 'redux/selectors';
+import { selectSearchQuery } from 'redux/selectors';
 
 const SearchForm = () => {
   const dispatch = useDispatch();
-  const searchQuery = useSelector(searchQueryValue);
+  const searchQuery = useSelector(selectSearchQuery);
   const inputRef = useRef();
 
   const handleSearchQuery = value => dispatch(setSearchQuery(value));
