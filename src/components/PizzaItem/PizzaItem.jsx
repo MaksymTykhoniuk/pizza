@@ -19,11 +19,11 @@ const PizzaItem = ({ item }) => {
   const handleActiveSize = idx => setActiveSize(idx);
   const handleFullPrice = () => {
     if (activeSize === 30) {
-      return `${Math.round(price * 1.2)} ₴`;
+      return Math.round(price * 1.2);
     } else if (activeSize === 40) {
-      return `${Math.round(price * 1.35)} ₴`;
+      return Math.round(price * 1.35);
     } else {
-      return `${price} ₴`;
+      return price;
     }
   };
 
@@ -32,6 +32,7 @@ const PizzaItem = ({ item }) => {
       id,
       title,
       price: handleFullPrice(),
+      // price,
       imageUrl,
       type: activeType,
       size: activeSize,
@@ -94,7 +95,7 @@ const PizzaItem = ({ item }) => {
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">{handleFullPrice()}</div>
+          <div className="pizza-block__price">{`${handleFullPrice()}₴`}</div>
           <button
             onClick={handleCartAdd}
             className="button button--outline button--add"
