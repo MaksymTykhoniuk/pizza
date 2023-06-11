@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useDispatch } from 'react-redux';
+import { addItem } from 'redux/slices/cartSlice';
 
 const typeNames = ['традициіне', 'тонке'];
 
 const PizzaItem = ({ item }) => {
-  const { imageUrl, title, types, sizes, price, ingredients } = item;
+  const dispatch = useDispatch();
+  const { id, imageUrl, title, types, sizes, price, ingredients } = item;
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(26);
   const [infoVisible, setInfoVisible] = useState(false);
@@ -22,6 +25,19 @@ const PizzaItem = ({ item }) => {
     } else {
       return `${price} ₴`;
     }
+  };
+
+  const handleCartAdd = () => {
+    const item = {
+      id,
+      title,
+      price: handleFullPrice(),
+      imageUrl,
+      type: activeType,
+      size: activeSize,
+    };
+
+    dispatch(addItem(item));
   };
 
   return (
@@ -79,7 +95,10 @@ const PizzaItem = ({ item }) => {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">{handleFullPrice()}</div>
-          <button className="button button--outline button--add">
+          <button
+            onClick={handleCartAdd}
+            className="button button--outline button--add"
+          >
             <svg
               width="12"
               height="12"

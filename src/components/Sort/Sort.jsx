@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortVariant } from 'redux/slices/filterSlice';
 import { selectSortType } from 'redux/selectors';
 
-const sortVariantList = [
+export const sortVariantList = [
   { name: 'популярності', value: 'rating' },
   { name: 'ціні ⬇', value: '-price' },
   { name: 'ціні ⬆', value: 'price' },
@@ -12,6 +12,7 @@ const sortVariantList = [
 
 const Sort = () => {
   const dispatch = useDispatch();
+  const sortRef = useRef();
   const sortVariant = useSelector(selectSortType);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -23,8 +24,24 @@ const Sort = () => {
     setIsVisible(prev => !prev);
   };
 
+  const handleOutsideClick = event => {
+    const path = event.composedPath();
+
+    if (!path.includes(sortRef.current)) {
+      setIsVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           className={isVisible ? 'sort__svg--active' : 'sort__svg'}

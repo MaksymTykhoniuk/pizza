@@ -5,6 +5,7 @@ import {
   selectSortType,
   selectSearchQuery,
 } from 'redux/selectors';
+
 import axios from 'axios';
 import PizzaItem from '../PizzaItem';
 import Skeleton from '../Sceleton';
