@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import '../../scss/app.scss';
 import SearchForm from 'components/SearchForm';
 import { useSelector } from 'react-redux';
-import { selectCartItems, selectCartTotalPrice } from 'redux/selectors';
+import { selectCartTotalCount, selectCartTotalPrice } from 'redux/selectors';
 
 const Header = () => {
-  const items = useSelector(selectCartItems);
+  const totalCount = useSelector(selectCartTotalCount);
   const totalPrice = useSelector(selectCartTotalPrice);
 
   return (
@@ -32,7 +32,7 @@ const Header = () => {
             <div className="button__delimiter"></div>
 
             <BsCart2 size={22} />
-            <span>{items.length}</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>
