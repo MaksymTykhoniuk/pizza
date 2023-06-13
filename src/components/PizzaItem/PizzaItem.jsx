@@ -45,7 +45,7 @@ const PizzaItem = ({ item }) => {
 
     setTimeout(() => {
       setIsAddedToCart(false);
-    }, 2000);
+    }, 1000);
 
     dispatch(addItem(item));
   };

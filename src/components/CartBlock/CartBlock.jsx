@@ -1,5 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  AiOutlineCloseCircle,
+  AiOutlinePlusCircle,
+  AiOutlineMinusCircle,
+} from 'react-icons/ai';
+import { BsCart2 } from 'react-icons/bs';
+import { IoTrashBinOutline } from 'react-icons/io5';
+
 import CartImage from '../../assets/img/empty-cart.png';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -7,7 +15,12 @@ import {
   selectCartTotalCount,
   selectCartTotalPrice,
 } from 'redux/selectors';
-import { addItem, clearItems } from 'redux/slices/cartSlice';
+import {
+  clearItems,
+  decrementItemCount,
+  deleteItem,
+  incrementItemCount,
+} from 'redux/slices/cartSlice';
 
 const pizzaType = ['тратційне', 'тонке'];
 
@@ -23,10 +36,13 @@ const CartBlock = () => {
         {items.length !== 0 ? (
           <>
             <div className="cart__top">
-              <h2 className="content__title">Корзина</h2>
+              <h2 className="content__title">
+                <BsCart2 /> Кошик
+              </h2>
               <div className="cart__clear">
+                <IoTrashBinOutline />
                 <span onClick={() => dispatch(clearItems())}>
-                  Очистить корзину
+                  Очистити кошик
                 </span>
               </div>
             </div>
@@ -47,25 +63,33 @@ const CartBlock = () => {
                         {pizzaType[el.type]} тісто, {el.size} см.
                       </p>
                     </div>
+
                     <div className="cart__item-count">
-                      <div className="button button--outline button--circle cart__item-count-minus">
-                        <p>-</p>
-                      </div>
+                      {el.count === 1 ? (
+                        <AiOutlineCloseCircle
+                          onClick={() => dispatch(deleteItem(el))}
+                          className="button button--outline button--circle button__item-remove"
+                        />
+                      ) : (
+                        <AiOutlineMinusCircle
+                          onClick={() => dispatch(decrementItemCount(el))}
+                          className="button button--outline button--circle cart__item-count-minus"
+                        />
+                      )}
                       <b>{el.count} шт.</b>
-                      <div
-                        onClick={() => dispatch(addItem())}
+                      <AiOutlinePlusCircle
+                        onClick={() => dispatch(incrementItemCount(el))}
                         className="button button--outline button--circle cart__item-count-plus"
-                      >
-                        <p>+</p>
-                      </div>
+                      />
                     </div>
                     <div className="cart__item-price">
                       <b>{el.price} грн</b>
                     </div>
                     <div className="cart__item-remove">
-                      <div className="button button--outline button--circle">
-                        <p>X</p>
-                      </div>
+                      <AiOutlineCloseCircle
+                        onClick={() => dispatch(deleteItem(el))}
+                        className="button button--outline button--circle"
+                      />
                     </div>
                   </li>
                 ))}
@@ -88,7 +112,7 @@ const CartBlock = () => {
                   Повернутись назад
                 </Link>
                 <div className="button pay-btn">
-                  <span>Розрахуватись одразу</span>
+                  <span>Оплатити замовлення</span>
                 </div>
               </div>
             </div>
@@ -96,16 +120,16 @@ const CartBlock = () => {
         ) : (
           <div className="cart cart--empty">
             <h2>
-              Корзина пустая <span>😕</span>
+              Кошик пустий <span>😕</span>
             </h2>
             <p>
-              Вероятней всего, вы не заказывали ещё пиццу.
+              Скоріш за все, ви ще не замовляли піцу.
               <br />
-              Для того, чтобы заказать пиццу, перейди на главную страницу.
+              Для того, щоб замовити піцу, перейдіть на головну сторінку.
             </p>
             <img src={CartImage} alt="Empty cart" />
             <Link to="/" className="button button--black">
-              <span>Вернуться назад</span>
+              <span>Повернутись назад</span>
             </Link>
           </div>
         )}
