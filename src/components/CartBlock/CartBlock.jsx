@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import {
   AiOutlineCloseCircle,
@@ -83,7 +84,7 @@ const CartBlock = () => {
                       />
                     </div>
                     <div className="cart__item-price">
-                      <b>{el.price} грн</b>
+                      <b>{el.price * el.count} грн</b>
                     </div>
                     <div className="cart__item-remove">
                       <AiOutlineCloseCircle
