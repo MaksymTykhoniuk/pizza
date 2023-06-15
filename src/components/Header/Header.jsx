@@ -1,5 +1,6 @@
 import React from 'react';
 import { BsCart2 } from 'react-icons/bs';
+
 import HeaderLogo from '../../assets/img/pizza-logo.svg';
 import { Link } from 'react-router-dom';
 import '../../scss/app.scss';
