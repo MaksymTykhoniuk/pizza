@@ -9,3 +9,7 @@ export const selectCartItems = state => state.cart.items;
 export const selectCartTotalPrice = state => state.cart.totalPrice;
 
 export const selectCartTotalCount = state => state.cart.totalCount;
+
+export const selectPizzaData = state => state.pizzas.items;
+
+export const selectIsLoading = state => state.pizzas.isLoading;
